@@ -1,6 +1,7 @@
 This is a test for articles. This is article <%= @article.id %> <br>
 <% if current_user.points >= @article.points %>
-	Great! You can view this.
+	Great! You can view this. <br><br>
+	<%= render "articles/articles/#{params[:id]}" %>
 <% else %>
 	Go away jerk.
 <% end %>

@@ -31,8 +31,15 @@ class Calorie < ActiveRecord::Base
 	# from protein. Plus, 1 or 2 points for being with 10% or 5% of daily calories. 
 	# Also, if a user goes over 120% or 140% of their calorie recommendation then they are docked a point.
 	
+	
 	def calculate_points
 		self.points = 0
+		
+		
+		
+		
+		=begin	
+		This is the old way of doing things - lot of code that I do not want to remove. 
 		new_weight = Weight.where(user_id: user_id).first.weight
 		if ( new_weight * 10 / 4 / 4 ) < self.carbs
 			self.points += 1
@@ -60,6 +67,7 @@ class Calorie < ActiveRecord::Base
 				self.points -= 1
 			end
 		end
+		=end
 	end
 	
 end
