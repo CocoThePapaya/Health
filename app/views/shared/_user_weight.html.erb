@@ -4,17 +4,19 @@
 		<th><b>Current Weight</b>
 		<th><b>Weight Lost</b>
 	</tr>
-	<% if @user.metric == 0 %>
-		<tr>
-			<th><%= (@user.weight.last.weight / 2.2).round(1) %> kg
-			<th><%= (@user.weight.first.weight / 2.2).round(1) %> kg
-			<th><%= ((@user.weight.last.weight-@user.weight.first.weight) / 2.2).round(1) %> kg 
-		</tr>
-	<% else %>
-		<tr>
-			<th><%= @user.weight.last.weight.round(1) %> lb
-			<th><%= @user.weight.first.weight.round(1) %> lb
-			<th><%= (@user.weight.last.weight-@user.weight.first.weight).round(1) %> lb
-		</tr>
+	<% if @user.weight.nil? %>
+		<% if @user.metric == 0 %>
+			<tr>
+				<th><%= (@user.weight.last.weight / 2.2).round(1) %> kg
+				<th><%= (@user.weight.first.weight / 2.2).round(1) %> kg
+				<th><%= ((@user.weight.last.weight-@user.weight.first.weight) / 2.2).round(1) %> kg 
+			</tr>
+		<% else %>
+			<tr>
+				<th><%= @user.weight.last.weight.round(1) %> lb
+				<th><%= @user.weight.first.weight.round(1) %> lb
+				<th><%= (@user.weight.last.weight-@user.weight.first.weight).round(1) %> lb
+			</tr>
+		<% end %>
 	<% end %>
 </table>

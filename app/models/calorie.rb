@@ -32,42 +32,44 @@ class Calorie < ActiveRecord::Base
 	# Also, if a user goes over 120% or 140% of their calorie recommendation then they are docked a point.
 	
 	
-	def calculate_points
-		self.points = 0
-		
-		
-		
-		
-		=begin	
-		This is the old way of doing things - lot of code that I do not want to remove. 
+	def calculate_points	
+	
 		new_weight = Weight.where(user_id: user_id).first.weight
-		if ( new_weight * 10 / 4 / 4 ) < self.carbs
-			self.points += 1
+		if ( new_weight - (10 * new_weight - self.calories).abs ) > 0
+			self.points += new_weight - (10 * new_weight - self.calories).abs 
 		end
-		if ( new_weight * 10 / 4 / 9 ) < self.fat
-			self.points += 1
-		end
-		if ( new_weight * 3 / 4 ) < self.protein
-			self.points += 1
-			if ( new_weight * 3.5 / 4 ) < self.protein
-				self.points += 1
-				if ( new_weight * 4 / 4 ) < self.protein
-					self.points += 1
-				end
-			end
-		end
-		if ( new_weight * 9 < self.calories && self.calories < new_weight * 11 )
-			self.points += 1
-			if ( new_weight * 9.5 < self.calories && self.calories < new_weight * 10.5 )
-				self.points += 1
-			end
-		elsif ( new_weight * 12 < self.calories ) 
-			self.points -= 1
-			if ( new_weight * 14 < self.calories ) 
-				self.points -= 1
-			end
-		end
-		=end
+		
+
+	# This is the old way of doing things - lot of code that I do not want to remove. 
+	# new_weight = Weight.where(user_id: user_id).first.weight
+	# self.points = 0
+	# if ( new_weight * 10 / 4 / 4 ) < self.carbs
+		# self.points += 1
+	# end
+	# if ( new_weight * 10 / 4 / 9 ) < self.fat
+		# self.points += 1
+	# end
+	# if ( new_weight * 3 / 4 ) < self.protein
+		# self.points += 1
+		# if ( new_weight * 3.5 / 4 ) < self.protein
+			# self.points += 1
+			# if ( new_weight * 4 / 4 ) < self.protein
+				# self.points += 1
+			# end
+		# end
+	# end
+	# if ( new_weight * 9 < self.calories && self.calories < new_weight * 11 )
+		# self.points += 1
+		# if ( new_weight * 9.5 < self.calories && self.calories < new_weight * 10.5 )
+			# self.points += 1
+		# end
+	# elsif ( new_weight * 12 < self.calories ) 
+		# self.points -= 1
+		# if ( new_weight * 14 < self.calories ) 
+			# self.points -= 1
+		# end
+	# end
+
 	end
 	
 end
