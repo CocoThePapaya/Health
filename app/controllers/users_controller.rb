@@ -2,21 +2,21 @@ class UsersController < ApplicationController
 
 	before_filter :authenticate, :except => [:show, :new, :create] 
 
-  def new
+	def new
 		@user = User.new
 		@title = "Sign up"
-  end
-  
-  def show
+	end
+
+	def show
 		@user = current_user
 		@title = @user.name
-  end
-  
-  def edit
+	end
+
+	def edit
 		@user = current_user
 		@title = "Edit user"
-  end
-  		
+	end
+		
 	def index 
 		@title = "All users"
 		@users = User.paginate(:page => params[:page])
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		if @user.save
 			sign_in @user
-			flash[:success] = "Welcome to the Sample App!"
+			flash[:success] = "You have taken the first step on the road to a better-looking you."
 			redirect_to '/profile'
 			UserMailer.registration_confirmation(@user).deliver
 		else
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 			render 'new'
 		end
 	end
-	
+
 	def update
 		@user = current_user
 		if @user.update_attributes(params[:user])
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 			render 'edit'
 		end
 	end
-	
+
 	def destroy
 		User.find(params[:id]).destroy
 		flash[:success] = "User destroyed."

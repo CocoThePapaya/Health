@@ -3,7 +3,7 @@ This is a test for articles. This is article <%= @article.id %> <br>
 	Great! You can view this. <br><br>
 	<%= render "articles/articles/#{params[:id]}" %>
 <% else %>
-	Go away jerk.
+	Go away.
 <% end %>
 <br><br>
 <% if Article.exists?(@article.id - 1) %>

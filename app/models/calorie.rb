@@ -23,23 +23,27 @@ class Calorie < ActiveRecord::Base
 	
 	def calculate_calories
 		self.calories = (protein * 4) + (carbs * 4) + (fat * 9)
-	end
-	
-	# calculate_calories is where a user is rewarded for adhearing to good diet specifications.
-	# 1 point each for making sure at least 25% of calories come from fat and carbs (to ensure 
-	# people eat enough) and 1, 2, or 3 points for getting over 30%, 35%, or 40% calories 
-	# from protein. Plus, 1 or 2 points for being with 10% or 5% of daily calories. 
-	# Also, if a user goes over 120% or 140% of their calorie recommendation then they are docked a point.
-	
+	end	
 	
 	def calculate_points	
 	
+		self.points = 0
 		new_weight = Weight.where(user_id: user_id).first.weight
 		if ( new_weight - (10 * new_weight - self.calories).abs ) > 0
 			self.points += new_weight - (10 * new_weight - self.calories).abs 
 		end
 		
 
+	end
+	
+end
+
+
+	# OLD WAY: "calculate_calories is where a user is rewarded for adhearing to good diet specifications.
+	# 1 point each for making sure at least 25% of calories come from fat and carbs (to ensure 
+	# people eat enough) and 1, 2, or 3 points for getting over 30%, 35%, or 40% calories 
+	# from protein. Plus, 1 or 2 points for being with 10% or 5% of daily calories. 
+	# Also, if a user goes over 120% or 140% of their calorie recommendation then they are docked a point.
 	# This is the old way of doing things - lot of code that I do not want to remove. 
 	# new_weight = Weight.where(user_id: user_id).first.weight
 	# self.points = 0
@@ -69,7 +73,3 @@ class Calorie < ActiveRecord::Base
 			# self.points -= 1
 		# end
 	# end
-
-	end
-	
-end
