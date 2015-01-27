@@ -6,7 +6,11 @@ class CaloriesController < ApplicationController
 			Calorie.where(user_id: current_user.id, date_of_entry: @calorie.date_of_entry).destroy_all
 		end
 		if @calorie.save
-			flash[:success] = "Macros saved!"
+			if @calorie.points > 0
+				flash[:success] = "Macros saved! #{@calorie.calories} calories means #{@calorie.points} points."
+			else	
+				flash[:failure] = "Macros saved. #{@calorie.calories} is outside of your suggested range. You'll get 'em next time!"
+			end
 		else
 			flash[:failure] = "That wasn't a number."
 		end

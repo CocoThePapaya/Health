@@ -26,13 +26,11 @@ class Calorie < ActiveRecord::Base
 	end	
 	
 	def calculate_points	
-	
 		self.points = 0
 		new_weight = Weight.where(user_id: user_id).first.weight
 		if ( new_weight - (10 * new_weight - self.calories).abs ) > 0
-			self.points += new_weight - (10 * new_weight - self.calories).abs 
+			self.points = new_weight - (10 * new_weight - self.calories).abs 
 		end
-		
 
 	end
 	

@@ -35,6 +35,7 @@ $(function () {
 		},
 		yAxis: [{
 			min: 0,
+			max: 2000,
 			title: {
 				text: 'Total Calories'
 			},
@@ -47,7 +48,7 @@ $(function () {
 			}
 		}, {
 			min: 0,
-			max: 7,
+			max: 300,
 			title: {
 				text: 'Points'
 				},
@@ -57,7 +58,7 @@ $(function () {
 			align: 'right',
 			x: -70,
 			verticalAlign: 'top',
-			y: 20,
+			y: 10,
 			floating: true,
 			backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
 			borderColor: '#CCC',
